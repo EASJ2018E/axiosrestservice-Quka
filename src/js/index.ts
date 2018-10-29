@@ -19,12 +19,12 @@ function updateHtml(customers: ICustomer[]): void {
  * Axios get request
  */
 function getHttp(): void {
-    
     let data: ICustomer[];
+
     axios.get <ICustomer[]> (uri)
     .then(function (response: AxiosResponse<ICustomer[]>): void {
         customers = response.data;
-        
+
         console.log(customers);
         updateHtml(customers);
     })
@@ -33,6 +33,24 @@ function getHttp(): void {
     });
 }
 
+/**
+ * Axios get single
+ */
+function getSingleHttp(): void {
+    let getId: number = Number((<HTMLInputElement> document.getElementById("getId")).value);
+    let getUri: string = uri + "/" + getId;
+    
+    axios.get <ICustomer> (getUri)
+    .then(function (response: AxiosResponse<ICustomer>): void {
+        let customer: ICustomer = response.data;
+
+        console.log(customer);
+        document.getElementById("getSingleOutput").innerHTML = JSON.stringify(customer);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
 
 /**
  * Axios post request
@@ -65,6 +83,37 @@ function postHttp(): void {
     });
 }
 
-getHttp();
 
+/**
+ * Axios delete request
+ */
+function deleteHttp(): void {
+    let delId: string = (<HTMLInputElement> document.getElementById("delId")).value;
+
+    axios.delete(uri + "/" + delId)
+    .then(function(response): void {
+        console.log(response)
+
+        // Behold Customers som ikke har den specifikke id (aka. slet fra array)
+        let filteredCustomers = customers.filter(c => {
+            return c.id !== response.data.id
+        })
+
+        console.log(filteredCustomers);
+
+        updateHtml(filteredCustomers);
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+}
+
+
+
+
+
+
+getHttp();
 document.getElementById("postHttpBtn").addEventListener("click", postHttp);
+document.getElementById("deleteHttpBtn").addEventListener("click", deleteHttp);
+document.getElementById("getHttpBtn").addEventListener("click", getSingleHttp);

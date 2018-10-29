@@ -29,11 +29,35 @@
     </label>
 
     <button class="confirm-btn" id="postHttpBtn">
-      Post request
+      POST request
     </button>      
   </div>
 
+  <div id="deleteContent">
+    <label>
+      ID to delete
+      <input type="text" name="delId" id="delId">
+    </label>
+    
+    <button class="delete-btn" id="deleteHttpBtn">
+      DELETE request
+    </button>
+  </div>
+
   <div id="output"></div>
+
+  <div id="getContent">
+    <label>
+      ID to retrieve
+      <input type="number" name="getId" id="getId">
+    </label>
+
+    <div id="getSingleOutput"></div>
+    
+    <button class="get-btn" id="getHttpBtn">
+      GET request
+    </button>
+  </div>
     
   <script src="bundle.js"></script>
 </body>
