@@ -2,14 +2,38 @@
 <html lang="en-US">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Coding Template</title>
+  <title>Customer Rest API</title>
   <link rel="stylesheet" type="text/css" href="bundle.css">
 </head>
 
 <body>
   <h1>Customer Rest API</h1>
 
-  <div id="content"></div>
+  <div id="postContent">
+
+    <h1>Post Car</h1>
+
+    <label>
+      First name
+      <input type="text" name="firstName" id="firstName">
+    </label>
+
+    <label>
+      Last name
+      <input type="text" name="lastName" id="lastName">
+    </label>
+
+    <label>
+      Year
+      <input type="number" name="year" id="year">
+    </label>
+
+    <button class="confirm-btn" id="postHttpBtn">
+      Post request
+    </button>      
+  </div>
+
+  <div id="output"></div>
     
   <script src="bundle.js"></script>
 </body>
