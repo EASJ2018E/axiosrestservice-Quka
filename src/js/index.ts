@@ -1,32 +1,48 @@
 import axios, {AxiosResponse, AxiosError} from "../../node_modules/axios/index";
 
-interface ICustomer {
+interface ICoin {
     id: number,
-    firstName: string,
-    lastName: string,
-    year: number;
+    genstand: string,
+    bud: number,
+    navn: string;
 }
 
-let uri: string = 'https://restcustomerservice20181011112426.azurewebsites.net/api/Customer';
-let customers: ICustomer[] = [];
+let uri: string = 'https://restcoinservice20181102095913.azurewebsites.net/api/Coin';
+let coins: ICoin[] = [];
 let HTMLContent = document.getElementById("output");
 
-function updateHtml(customers: ICustomer[]): void {
-    HTMLContent.innerHTML = JSON.stringify(customers);
+function updateHtml(coins: ICoin[]): void {
+    let result = "<table>";
+    result += "<tr>" +
+                "<td>id</td>" +
+                "<td>genstand</td>" +
+                "<td>bud</td>" +
+                "<td>navn</td>" +
+              "</tr>";
+
+
+    for (let i = 0; i < coins.length; i++) {
+        const c = coins[i];
+        result += "<tr>" + "<td>" + c.id +  "</td>" + "<td>" + c.genstand +  "</td>" + "<td>" + c.bud +  "</td>" + "<td>" + c.navn +  "</td>" + "</tr>";
+    }
+
+    result += "</table>";
+
+    HTMLContent.innerHTML = result;
 }
 
 /**
  * Axios get request
  */
 function getHttp(): void {
-    let data: ICustomer[];
+    let data: ICoin[];
 
-    axios.get <ICustomer[]> (uri)
-    .then(function (response: AxiosResponse<ICustomer[]>): void {
-        customers = response.data;
+    axios.get <ICoin[]> (uri)
+    .then(function (response: AxiosResponse<ICoin[]>): void {
+        coins = response.data;
 
-        console.log(customers);
-        updateHtml(customers);
+        console.log(coins);
+        updateHtml(coins);
     })
     .catch(function (error) {
         console.log(error);
@@ -40,12 +56,12 @@ function getSingleHttp(): void {
     let getId: number = Number((<HTMLInputElement> document.getElementById("getId")).value);
     let getUri: string = uri + "/" + getId;
     
-    axios.get <ICustomer> (getUri)
-    .then(function (response: AxiosResponse<ICustomer>): void {
-        let customer: ICustomer = response.data;
+    axios.get <ICoin> (getUri)
+    .then(function (response: AxiosResponse<ICoin>): void {
+        let coin: ICoin = response.data;
 
-        console.log(customer);
-        document.getElementById("getSingleOutput").innerHTML = JSON.stringify(customer);
+        console.log(coin);
+        document.getElementById("getSingleOutput").innerHTML = JSON.stringify(coin);
     })
     .catch(function (error) {
         console.log(error);
@@ -57,25 +73,25 @@ function getSingleHttp(): void {
  */
 function postHttp(): void {
     //let idVal: number = Number( (<HTMLInputElement> document.getElementById("id")).value );
-    let firstNameVal: string = (<HTMLInputElement> document.getElementById("firstName")).value;
-    let lastNameVal: string = (<HTMLInputElement> document.getElementById("lastName")).value;
-    let yearVal: number = Number((<HTMLInputElement> document.getElementById("year")).value);
+    let genstandVal: string = (<HTMLInputElement> document.getElementById("genstand")).value;
+    let budVal: number = Number( (<HTMLInputElement> document.getElementById("bud")).value );
+    let navnVal: string = (<HTMLInputElement> document.getElementById("navn")).value;
 
-    let newCustomer: ICustomer = <ICustomer> {
-        firstName: firstNameVal,
-        lastName: lastNameVal,
-        year: yearVal
+    let newCoin: ICoin = <ICoin> {
+        genstand: genstandVal,
+        bud: budVal,
+        navn: navnVal
     }
 
-    axios.post<ICustomer>(uri, newCustomer)
-    .then(function(response: AxiosResponse<ICustomer>): void {
+    axios.post<ICoin>(uri, newCoin)
+    .then(function(response: AxiosResponse<ICoin>): void {
         if(response.status == 200) {
             console.log(response.data);
-            let customerResult: ICustomer = response.data;
+            let coinResult: ICoin = response.data;
             
-            customers.push(customerResult);
+            coins.push(coinResult);
 
-            updateHtml(customers);
+            updateHtml(coins);
         }
     })
     .catch(function(error){
@@ -94,14 +110,14 @@ function deleteHttp(): void {
     .then(function(response): void {
         console.log(response)
 
-        // Behold Customers som ikke har den specifikke id (aka. slet fra array)
-        let filteredCustomers = customers.filter(c => {
+        // Behold coins som ikke har den specifikke id (aka. slet fra array)
+        let filteredcoins = coins.filter(c => {
             return c.id !== response.data.id
         })
 
-        console.log(filteredCustomers);
+        console.log(filteredcoins);
 
-        updateHtml(filteredCustomers);
+        updateHtml(filteredcoins);
     })
     .catch(function(error){
         console.log(error);

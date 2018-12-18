@@ -1,3 +1,41 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 label {
     display: block;
+    border-radius: 3px;
+    margin: 10px 0;
+
+    span {
+        display: inline-block;
+        text-align: right;
+    }
+}
+
+#wrapper {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.area {
+    border: 1px solid #000;
+    box-sizing: border-box;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+table {
+    tr:first-child {
+        font-weight: bold;
+        background: #ccc !important;
+    }
+
+    tr:nth-child(odd){
+        background: #f0f0f0;
+    }
+
+    td {
+        padding: 8px;
+    }
 }

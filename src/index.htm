@@ -2,61 +2,70 @@
 <html lang="en-US">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Customer Rest API</title>
+  <title>Coin Rest API</title>
   <link rel="stylesheet" type="text/css" href="bundle.css">
 </head>
 
 <body>
-  <h1>Customer Rest API</h1>
 
-  <div id="postContent">
+  <div id="wrapper">
+    <h1>Coin Rest API</h1>
 
-    <h1>Post Car</h1>
+    <div class="area" id="getAllContent">
+      <strong>Get all coins</strong>
+      <div id="output"></div>
+    </div>
 
-    <label>
-      First name
-      <input type="text" name="firstName" id="firstName">
-    </label>
+    <div class="area" id="postContent">
 
-    <label>
-      Last name
-      <input type="text" name="lastName" id="lastName">
-    </label>
+      <strong>Post new coin</strong>
+      
+      <label>
+        <span>Genstand</span>
+        <input type="text" name="genstand" id="genstand">
+      </label>
 
-    <label>
-      Year
-      <input type="number" name="year" id="year">
-    </label>
+      <label>
+          <span>Bud</span>
+        <input type="number" name="bud" id="bud">
+      </label>
 
-    <button class="confirm-btn" id="postHttpBtn">
-      POST request
-    </button>      
-  </div>
+      <label>
+          <span>Navn</span>
+        <input type="text" name="navn" id="navn">
+      </label>
 
-  <div id="deleteContent">
-    <label>
-      ID to delete
-      <input type="text" name="delId" id="delId">
-    </label>
-    
-    <button class="delete-btn" id="deleteHttpBtn">
-      DELETE request
-    </button>
-  </div>
+      <button class="confirm-btn" id="postHttpBtn">
+        POST request
+      </button>      
+    </div>
 
-  <div id="output"></div>
+    <div class="area" id="deleteContent">
+      <strong>Delete coin</strong>
+      <label>
+          <span>ID to delete</span>
+        <input type="number" name="delId" id="delId">
+      </label>
+      
+      <button class="delete-btn" id="deleteHttpBtn">
+        DELETE request
+      </button>
+    </div>
 
-  <div id="getContent">
-    <label>
-      ID to retrieve
-      <input type="number" name="getId" id="getId">
-    </label>
+    <div class="area" id="getContent">
+      <strong>Get coin</strong>
 
-    <div id="getSingleOutput"></div>
-    
-    <button class="get-btn" id="getHttpBtn">
-      GET request
-    </button>
+      <label>
+          <span>ID to retrieve</span>
+        <input type="number" name="getId" id="getId">
+      </label>
+
+      <div id="getSingleOutput"></div>
+      
+      <button class="get-btn" id="getHttpBtn">
+        GET request
+      </button>
+    </div>
   </div>
     
   <script src="bundle.js"></script>
